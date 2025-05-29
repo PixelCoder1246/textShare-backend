@@ -13,6 +13,12 @@ app.use(express.json());
 
 connectDB();
 
+app.get('/',(req, res)=> {
+  res.json({
+    message: 'Welcome to the API',
+  });
+})
+
 app.post('/share', async (req, res) => {
     const { text, expiresInSeconds } = req.body;
     if (!text || !expiresInSeconds) {
