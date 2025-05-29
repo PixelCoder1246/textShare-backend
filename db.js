@@ -1,16 +1,9 @@
-const mongoId = process.env.MONGO_URI;
+import mongoose from 'mongoose';
 
-const mongoose = require('mongoose');
+let isConnected = false;
 
-const connectDB = async () => {
-  try {
-    await mongoose.connect(mongoId, {
-    });
-    console.log('MongoDB connected');
-  } catch (err) {
-    console.error(err);
-    process.exit(1);
-  }
-};
-
-module.exports = connectDB;
+export default async function connectDB() {
+  if (isConnected) return;
+  const conn = await mongoose.connect(process.env.MONGO_URI);
+  isConnected = conn.connections[0].readyState;
+}

@@ -1,9 +1,8 @@
-
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const textSchema = new mongoose.Schema({
   text: { type: String, required: true },
   expiresAt: { type: Date, required: true, index: { expires: 0 } },
 });
 
-module.exports = mongoose.model('Text', textSchema);
+export default mongoose.models.Text || mongoose.model('Text', textSchema);
